@@ -2416,6 +2416,13 @@ status_t AudioPolicyManager::startInput(audio_io_handle_t input,
         }
     }
 
+    AudioParameter param = AudioParameter();
+    param.addInt(String8(AudioParameter::keyRouting), (int)inputDesc->mDevice);
+    int aliasSource = (inputDesc->mInputSource == AUDIO_SOURCE_HOTWORD) ?
+              AUDIO_SOURCE_VOICE_RECOGNITION : inputDesc->mInputSource;
+    param.addInt(String8(AudioParameter::keyInputSource), aliasSource);
+    mpClientInterface->setParameters(input, param.toString());
+
     ALOGV("AudioPolicyManager::startInput() input source = %d", inputDesc->mInputSource);
 
     inputDesc->mRefCount++;
