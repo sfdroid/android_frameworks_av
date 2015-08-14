@@ -5646,7 +5646,9 @@ audio_devices_t AudioPolicyManager::getDeviceForStrategy(routing_strategy strate
 
         if ((strategy == STRATEGY_SONIFICATION) ||
                 (mForceUse[AUDIO_POLICY_FORCE_FOR_SYSTEM] == AUDIO_POLICY_FORCE_SYSTEM_ENFORCED)) {
-            device = availableOutputDeviceTypes & AUDIO_DEVICE_OUT_SPEAKER;
+            if(!isInCall()) {
+                device = availableOutputDeviceTypes & AUDIO_DEVICE_OUT_SPEAKER;
+            }
             if (device == AUDIO_DEVICE_NONE) {
                 ALOGE("getDeviceForStrategy() speaker device not found for STRATEGY_SONIFICATION");
             }
