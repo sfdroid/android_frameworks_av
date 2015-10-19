@@ -1315,7 +1315,7 @@ void CameraService::setCameraFree(int cameraId) {
 MediaPlayer* CameraService::newMediaPlayer(const char *file) {
     MediaPlayer* mp = new MediaPlayer();
     if (mp->setDataSource(NULL /* httpService */, file, NULL) == NO_ERROR) {
-        mp->setAudioStreamType(AUDIO_STREAM_ENFORCED_AUDIBLE);
+        mp->setAudioStreamType(AUDIO_STREAM_SYSTEM);
         mp->prepare();
     } else {
         ALOGE("Failed to load CameraService sounds: %s", file);
