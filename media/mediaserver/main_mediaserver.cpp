@@ -30,7 +30,7 @@
 
 // from LOCAL_C_INCLUDES
 #include "AudioFlinger.h"
-#include "CameraService.h"
+//#include "CameraService.h"
 #include "MediaLogService.h"
 #include "MediaPlayerService.h"
 #include "AudioPolicyService.h"
@@ -137,8 +137,9 @@ int main(int argc, char** argv)
         SecTVOutService::instantiate();
 #endif
         AudioFlinger::instantiate();
-        MediaPlayerService::instantiate();
-        CameraService::instantiate();
+        // sfos has these
+        //MediaPlayerService::instantiate();
+        //CameraService::instantiate();
 #ifdef AUDIO_LISTEN_ENABLED
         ALOGI("ListenService instantiated");
         ListenService::instantiate();
