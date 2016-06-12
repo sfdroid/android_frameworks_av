@@ -129,8 +129,8 @@ int main(int argc __unused, char** argv)
         sp<IServiceManager> sm = defaultServiceManager();
         ALOGI("ServiceManager: %p", sm.get());
         AudioFlinger::instantiate();
-        MediaPlayerService::instantiate();
-        CameraService::instantiate();
+        //MediaPlayerService::instantiate();
+        //CameraService::instantiate();
 #ifdef AUDIO_LISTEN_ENABLED
         ALOGI("ListenService instantiated");
         ListenService::instantiate();
