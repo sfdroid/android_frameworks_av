@@ -135,7 +135,7 @@ int main(int argc __unused, char** argv)
         ALOGI("ListenService instantiated");
         ListenService::instantiate();
 #endif
-        AudioPolicyService::instantiate();
+        //AudioPolicyService::instantiate();
         SoundTriggerHwService::instantiate();
         registerExtensions();
         ProcessState::self()->startThreadPool();
