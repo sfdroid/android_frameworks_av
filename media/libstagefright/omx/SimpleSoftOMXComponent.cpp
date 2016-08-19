@@ -468,6 +468,12 @@ void SimpleSoftOMXComponent::onPortEnable(OMX_U32 portIndex, bool enable) {
     PortInfo *port = &mPorts.editItemAt(portIndex);
     CHECK_EQ((int)port->mTransition, (int)PortInfo::NONE);
     CHECK(port->mDef.bEnabled == !enable);
+    if (port->mDef.eDir != OMX_DirOutput) {
+        ALOGE("Port enable/disable allowed only on output ports.");
+        notify(OMX_EventError, OMX_ErrorUndefined, 0, NULL);
+        android_errorWriteLog(0x534e4554, "29421804");
+        return;
+    }
 
     if (!enable) {
         port->mDef.bEnabled = OMX_FALSE;
