@@ -1059,7 +1059,7 @@ ACodec::BufferInfo *ACodec::dequeueBufferFromNativeWindow() {
         VideoDecoderOutputMetaData *metaData =
             reinterpret_cast<VideoDecoderOutputMetaData *>(
                     oldest->mData->base());
-        CHECK_EQ(metaData->eType, kMetadataBufferTypeGrallocSource);
+        //CHECK_EQ(metaData->eType, kMetadataBufferTypeGrallocSource);
 
         ALOGV("replaced oldest buffer #%u with age %u (%p/%p stored in %p)",
                 oldest - &mBuffers[kPortIndexOutput][0],
@@ -1307,8 +1307,10 @@ status_t ACodec::configureCodec(
         if (err != OK) {
               ALOGE("[%s] storeMetaDataInBuffers (input) failed w/ err %d",
                     mComponentName.c_str(), err);
-
-              return err;
+              if (mOMX->livesLocally(mNode, getpid())) {
+                  return err;
+              }
+              ALOGI("ignoring failure to use internal MediaCodec key.");
           }
       }
 
